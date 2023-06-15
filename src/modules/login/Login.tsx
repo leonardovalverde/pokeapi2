@@ -3,15 +3,17 @@ import { StyledContainer } from "./styles";
 import { useSelector } from "react-redux";
 import { UserState } from "@/store/slice/userSlice";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Login = (): JSX.Element => {
-  const userData = useSelector((state: UserState) => state.user);
-
+  const route = useRouter();
+  
   useEffect(() => {
-    if (userData.token) {
-      window.location.href = "/dashboard";
+    const token = window.localStorage.getItem("token");
+    if (token) {
+      route.push("/dashboard");
     }
-  }, [userData]);
+  }, [route]);
 
   return (
     <StyledContainer>

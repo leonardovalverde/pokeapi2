@@ -27,6 +27,7 @@ const DashboardHeader = () => {
 
   const handleLogout = () => {
     dispatch(setUser({} as UserState));
+    window.localStorage.removeItem("token");
     router.push("/login");
   };
 

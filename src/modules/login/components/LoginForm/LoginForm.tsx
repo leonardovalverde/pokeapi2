@@ -4,10 +4,12 @@ import { setUser } from "@/store/slice/userSlice";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { loginSchema } from "./validations";
 
 const LoginForm = (): JSX.Element => {
+  const route = useRouter();
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
 
@@ -24,10 +26,13 @@ const LoginForm = (): JSX.Element => {
           id: 1,
           email: values.email,
           name: "Leonardo Valverde",
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxlY29uYXJkb3ZlbG9yZGVAdGVzdC5jb20iLCJpYXQiOjE2MzI1NjY0NzMsImV4cCI",
         })
       );
+      window.localStorage.setItem(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxlY29uYXJkb3ZlbG9yZGVAdGVzdC5jb20iLCJpYXQiOjE2MzI1NjY0NzMsImV4cCI"
+      );
+      route.push("/dashboard");
     },
   });
 

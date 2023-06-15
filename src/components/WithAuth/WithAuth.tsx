@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
-import { UserState } from "@/store/slice/userSlice";
-import { useSelector } from "react-redux";
 import { AuthProps } from "./types";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import { useState, useEffect } from "react";
 
 const Auth = ({ children }: AuthProps) => {
+  const localStorageToken = window.localStorage.getItem("token");
   const router = useRouter();
-  const userData = useSelector((state: UserState) => state.user);
 
-  if (userData.token || router.pathname === "/login") return <>{children}</>;
-  else if (!userData.token && router.pathname !== "/login") {
+  if (localStorageToken || router.pathname === "/login") return <>{children}</>;
+  else if (!localStorageToken && router.pathname !== "/login") {
     router.push("/login");
     return <LoadingScreen />;
   }
