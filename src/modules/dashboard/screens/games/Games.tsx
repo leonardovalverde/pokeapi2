@@ -23,8 +23,6 @@ const Games = () => {
     id: gameId,
   });
 
-  console.log("teste");
-
   const {
     data: allGamesData,
     isSuccess: allGamesIsSucess,
