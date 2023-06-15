@@ -1,3 +1,4 @@
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 import Auth from "@/components/WithAuth/WithAuth";
 import { GlobalStyles } from "@/GlobalStyles";
 import StyledComponentsRegistry from "@/lib/registry";
@@ -15,7 +16,7 @@ const roboto = Roboto({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<LoadingScreen />} persistor={persistor}>
         <StyledComponentsRegistry>
           <main className={roboto.className}>
             <GlobalStyles />

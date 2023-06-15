@@ -8,12 +8,12 @@ const Auth = ({ children }: AuthProps) => {
   const router = useRouter();
   const userData = useSelector((state: UserState) => state.user);
 
-  if (userData.token) return <>{children}</>;
+  if (userData.token || router.pathname === "/login") return <>{children}</>;
   else if (!userData.token && router.pathname !== "/login") {
     router.push("/login");
     return <LoadingScreen />;
   }
-  return <>{children}</>;
+  return <LoadingScreen />;
 };
 
 export default Auth;
