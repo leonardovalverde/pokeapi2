@@ -113,10 +113,22 @@ export default function EnhancedTable({
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
+            "@media (max-width: 620px)": {
+              flexDirection: "column",
+              justifyContent: "center",
+            },
           }}
         >
           {onPreviousPage && onNextPage && count && (
-            <>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                "@media (max-width: 620px)": {
+                  marginBottom: theme.spacing(2),
+                },
+              }}
+            >
               <Button
                 sx={{ lineHeight: 0 }}
                 disabled={page === 0}
@@ -132,10 +144,17 @@ export default function EnhancedTable({
               >
                 Próximo
               </Button>
-            </>
+            </Box>
           )}
           {count && (
-            <Typography ml={theme.spacing(2)}>
+            <Typography
+              sx={{
+                marginLeft: theme.spacing(2),
+                "@media (max-width: 620px)": {
+                  marginLeft: 0,
+                },
+              }}
+            >
               Mostrando {pageCounter}-{pageCounter + 10} de {count}
             </Typography>
           )}
