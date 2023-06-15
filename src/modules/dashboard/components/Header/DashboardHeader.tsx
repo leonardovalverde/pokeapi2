@@ -7,20 +7,28 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
 import Menu from "@mui/material/Menu";
-import { MenuItem } from "@mui/material";
-import { useSelector } from "react-redux";
-import { UserState } from "@/store/slice/userSlice";
+import { MenuItem, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { UserState, setUser } from "@/store/slice/userSlice";
 import {
   DashboardContext,
   DashboardContextProps,
 } from "../../context/DashboardContext";
 import { useContext } from "react";
+import { useRouter } from "next/router";
 
 const DashboardHeader = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { setModule } = useContext(DashboardContext) as DashboardContextProps;
   const userData = useSelector((state: UserState) => state.user);
   const open = Boolean(anchorEl);
+
+  const handleLogout = () => {
+    dispatch(setUser({} as UserState));
+    router.push("/login");
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -69,9 +77,17 @@ const DashboardHeader = () => {
               </MenuItem>
               <MenuItem onClick={() => handleModule("games")}>Jogos</MenuItem>
             </Menu>
-            <div>
-              <span>Bem-vindo {userData.name}.</span>
-            </div>
+            <Box>
+              <Typography
+                sx={{
+                  "@media (max-width: 620px)": {
+                    display: "none",
+                  },
+                }}
+              >
+                Bem-vindo {userData.name}.
+              </Typography>
+            </Box>
           </Box>
           <Box>
             <Image
@@ -89,7 +105,9 @@ const DashboardHeader = () => {
           <Box
             sx={{ display: "flex", width: "300px", justifyContent: "flex-end" }}
           >
-            sair
+            <Button sx={{ color: "#fff" }} onClick={handleLogout}>
+              sair
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
