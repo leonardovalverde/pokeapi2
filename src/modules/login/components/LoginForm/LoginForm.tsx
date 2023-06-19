@@ -26,11 +26,9 @@ const LoginForm = (): JSX.Element => {
           id: 1,
           email: values.email,
           name: "Leonardo Valverde",
+          token:
+            "eyJlbWFpbCI6ImxlY29uYXJkb3ZlbG9yZGVAdGVzdC5jb20iLCJpYXQiOjE2MzI1NjY0NzMsImV4cCI",
         })
-      );
-      window.localStorage.setItem(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxlY29uYXJkb3ZlbG9yZGVAdGVzdC5jb20iLCJpYXQiOjE2MzI1NjY0NzMsImV4cCI"
       );
       route.push("/dashboard");
     },
