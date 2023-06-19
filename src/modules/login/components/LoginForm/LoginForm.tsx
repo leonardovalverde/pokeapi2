@@ -13,7 +13,7 @@ const LoginForm = (): JSX.Element => {
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
 
-  const { handleSubmit, handleChange, values, errors } = useFormik({
+  const { handleSubmit, handleChange, values, errors, touched } = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -77,8 +77,12 @@ const LoginForm = (): JSX.Element => {
             autoFocus
             onChange={handleChange}
             value={values.email}
-            error={!!errors.email}
-            helperText={errors.email}
+            error={!!errors.email && touched.email}
+            helperText={
+              <Typography variant="caption" color="error">
+                {errors.email}
+              </Typography>
+            }
           />
           <TextField
             margin="normal"
@@ -90,8 +94,12 @@ const LoginForm = (): JSX.Element => {
             id="password"
             onChange={handleChange}
             value={values.password}
-            error={!!errors.password}
-            helperText={errors.password}
+            error={!!errors.password && touched.password}
+            helperText={
+              <Typography variant="caption" color="error">
+                {errors.email}
+              </Typography>
+            }
           />
           <Button
             type="submit"
